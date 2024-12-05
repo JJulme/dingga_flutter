@@ -1,4 +1,5 @@
 // flutter run -d chrome --web-port=8080
+// flutter run -d chrome --web-port=8080 --web-renderer html
 
 import 'dart:ui';
 

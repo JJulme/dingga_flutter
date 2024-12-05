@@ -77,7 +77,7 @@ class PlaceDataController extends GetxController {
   // Dio 초기 설정
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'https://3.81.106.216',
+      baseUrl: 'https://www.dingga.shop',
       connectTimeout: const Duration(seconds: 5), // 연결 타임아웃 설정
       receiveTimeout: const Duration(seconds: 3), // 응답 타임아웃 설정
     ),
