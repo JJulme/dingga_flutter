@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:math';
 
 class HomeScreen extends GetResponsiveView {
   HomeScreen({super.key});
@@ -8,41 +9,51 @@ class HomeScreen extends GetResponsiveView {
   Widget phone() {
     return Builder(
       builder: (context) {
+        // MediaQuery를 사용하여 화면 너비와 높이를 가져옵니다.
+        double screenWidth = MediaQuery.of(context).size.width;
+        double screenHeight = MediaQuery.of(context).size.height;
+        // 대각선 크기 계산
+        double diagonal =
+            sqrt(screenWidth * screenWidth + screenHeight * screenHeight);
         return Scaffold(
-          appBar: homeAppbar(),
+          appBar: homeAppbar(diagonal),
           body: Column(
             children: [
-              mainText("놀러갈 장소들의 정보를 비교해 보세요!"),
+              mainText("놀러갈 장소들의 정보를 비교해 보세요!", diagonal),
               playtypeBtnPhone(
                 playtype: "/Themepark",
                 text: "놀이공원",
                 img: "assets/images/themepark_background2_phone.jpg",
-                width: 300,
-                margin: 35,
+                textSize: 0.055 * diagonal,
+                width: 0.35 * diagonal,
+                margin: 0.03 * diagonal,
               ),
               playtypeBtnPhone(
                 playtype: "/Zoo",
                 text: "동물원",
                 img: "assets/images/zoo_background_phone.jpg",
-                width: 300,
-                margin: 35,
+                textSize: 0.055 * diagonal,
+                width: 0.35 * diagonal,
+                margin: 0.03 * diagonal,
               ),
               playtypeBtnPhone(
                 playtype: "/Aquarium",
                 text: "아쿠아리움",
                 img: "assets/images/aquarium_background_phone.jpg",
-                width: 300,
-                margin: 35,
+                textSize: 0.055 * diagonal,
+                width: 0.35 * diagonal,
+                margin: 0.03 * diagonal,
               ),
               playtypeBtnPhone(
                 playtype: "/Ski",
                 text: "스키장",
                 img: "assets/images/ski_background.jpg",
-                width: 300,
-                margin: 35,
+                textSize: 0.055 * diagonal,
+                width: 0.35 * diagonal,
+                margin: 0.03 * diagonal,
               ),
               Container(
-                height: 30,
+                height: 0.05 * diagonal,
                 color: Colors.white,
               )
             ],
@@ -56,11 +67,17 @@ class HomeScreen extends GetResponsiveView {
   Widget tablet() {
     return Builder(
       builder: (context) {
+        // MediaQuery를 사용하여 화면 너비와 높이를 가져옵니다.
+        double screenWidth = MediaQuery.of(context).size.width;
+        double screenHeight = MediaQuery.of(context).size.height;
+        // 대각선 크기 계산
+        double diagonal =
+            sqrt(screenWidth * screenWidth + screenHeight * screenHeight);
         return Scaffold(
-          appBar: homeAppbar(),
+          appBar: homeAppbar(diagonal),
           body: Column(
             children: [
-              mainText("전국의 놀이공원, 동물원, 아쿠아리움, 스키장의 정보를 비교해 보세요!"),
+              mainText("전국의 놀이공원, 동물원, 아쿠아리움, 스키장의 정보를 비교해 보세요!", diagonal),
               Flexible(
                 child: Row(
                   children: [
@@ -68,15 +85,17 @@ class HomeScreen extends GetResponsiveView {
                       playtype: "/Themepark",
                       text: "놀이공원",
                       img: "assets/images/themepark_background2_phone.jpg",
-                      width: 280,
-                      margin: 50,
+                      textSize: 0.055 * diagonal,
+                      width: 0.25 * diagonal,
+                      margin: 0.035 * diagonal,
                     ),
                     playtypeBtnPhone(
                       playtype: "/Zoo",
                       text: "동물원",
                       img: "assets/images/zoo_background.jpg",
-                      width: 280,
-                      margin: 50,
+                      textSize: 0.055 * diagonal,
+                      width: 0.25 * diagonal,
+                      margin: 0.035 * diagonal,
                     ),
                   ],
                 ),
@@ -88,21 +107,23 @@ class HomeScreen extends GetResponsiveView {
                       playtype: "/Aquarium",
                       text: "아쿠아리움",
                       img: "assets/images/aquarium_background.jpg",
-                      width: 280,
-                      margin: 50,
+                      textSize: 0.055 * diagonal,
+                      width: 0.25 * diagonal,
+                      margin: 0.035 * diagonal,
                     ),
                     playtypeBtnPhone(
                       playtype: "/Ski",
                       text: "스키장",
                       img: "assets/images/ski_background.jpg",
-                      width: 280,
-                      margin: 50,
+                      textSize: 0.055 * diagonal,
+                      width: 0.25 * diagonal,
+                      margin: 0.035 * diagonal,
                     ),
                   ],
                 ),
               ),
               Container(
-                height: 50,
+                height: 0.05 * diagonal,
                 color: Colors.white,
               ),
             ],
@@ -116,11 +137,18 @@ class HomeScreen extends GetResponsiveView {
   Widget desktop() {
     return Builder(
       builder: (context) {
+        // MediaQuery를 사용하여 화면 너비와 높이를 가져옵니다.
+        double screenWidth = MediaQuery.of(context).size.width;
+        double screenHeight = MediaQuery.of(context).size.height;
+        // 대각선 크기 계산
+        double diagonal =
+            sqrt(screenWidth * screenWidth + screenHeight * screenHeight);
         return Scaffold(
-          appBar: homeAppbar(),
+          appBar: homeAppbar(0.75 * diagonal),
           body: Column(
             children: [
-              mainText("전국의 놀이공원, 동물원, 아쿠아리움, 스키장의 정보를 비교해 보세요!"),
+              mainText(
+                  "전국의 놀이공원, 동물원, 아쿠아리움, 스키장의 정보를 비교해 보세요!", 0.75 * diagonal),
               Expanded(
                 child: Row(
                   children: [
@@ -128,35 +156,39 @@ class HomeScreen extends GetResponsiveView {
                       playtype: "/Themepark",
                       text: "놀이공원",
                       img: "assets/images/themepark_background2.jpg",
+                      textSize: 0.045 * diagonal,
                       width: double.infinity,
-                      margin: 220,
+                      margin: 0.1 * diagonal,
                     ),
                     playtypeBtnPhone(
                       playtype: "Zoo",
                       text: "동물원",
                       img: "assets/images/zoo_background.jpg",
+                      textSize: 0.045 * diagonal,
                       width: double.infinity,
-                      margin: 220,
+                      margin: 0.1 * diagonal,
                     ),
                     playtypeBtnPhone(
                       playtype: "/Aquarium",
                       text: "아쿠아리움",
                       img: "assets/images/aquarium_background.jpg",
+                      textSize: 0.045 * diagonal,
                       width: double.infinity,
-                      margin: 220,
+                      margin: 0.1 * diagonal,
                     ),
                     playtypeBtnPhone(
                       playtype: "/Ski",
                       text: "스키장",
                       img: "assets/images/ski_background.jpg",
+                      textSize: 0.045 * diagonal,
                       width: double.infinity,
-                      margin: 220,
+                      margin: 0.1 * diagonal,
                     ),
                   ],
                 ),
               ),
               Container(
-                height: 50,
+                height: 0.05 * diagonal,
                 color: Colors.white,
               ),
             ],
@@ -167,7 +199,7 @@ class HomeScreen extends GetResponsiveView {
   }
 
   // 앱바
-  AppBar homeAppbar() {
+  AppBar homeAppbar(double di) {
     return AppBar(
       //뒤로가기 버튼 없애기
       automaticallyImplyLeading: false,
@@ -175,8 +207,8 @@ class HomeScreen extends GetResponsiveView {
       backgroundColor: Colors.white,
       // 앱바 밑 그림자
       title: SizedBox(
-        height: 50,
-        width: 120,
+        height: 0.05 * di,
+        width: 0.12 * di,
         child: InkWell(
           onTap: () => Get.offAll(() => HomeScreen()),
           child: Image.asset("assets/images/dingga_logo2.png"),
@@ -191,9 +223,9 @@ class HomeScreen extends GetResponsiveView {
             ),
             Text(
               " dingga822@naver.com",
-              style: TextStyle(color: Colors.grey[400]),
+              style: TextStyle(color: Colors.grey[400], fontSize: 0.015 * di),
             ),
-            const SizedBox(width: 10),
+            SizedBox(width: 0.01 * di),
           ],
         )
       ],
@@ -201,16 +233,16 @@ class HomeScreen extends GetResponsiveView {
   }
 
   // 앱바 밑에 안내 문구
-  Container mainText(txt) {
+  Container mainText(txt, double di) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(15),
+      padding: EdgeInsets.all(0.02 * di),
       color: Colors.white,
       child: Center(
         child: Text(
           txt,
-          style: const TextStyle(
-            fontSize: 20,
+          style: TextStyle(
+            fontSize: 0.023 * di,
             color: Colors.black54,
           ),
         ),
@@ -223,6 +255,7 @@ class HomeScreen extends GetResponsiveView {
     required String playtype,
     required String text,
     required String img,
+    required double textSize,
     required double width,
     required double margin,
   }) {
@@ -249,7 +282,7 @@ class HomeScreen extends GetResponsiveView {
               alignment: Alignment.center,
               child: Text(
                 text,
-                style: const TextStyle(fontSize: 50, color: Colors.white),
+                style: TextStyle(fontSize: textSize, color: Colors.white),
               ),
             ),
           ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // 기본 AppBar 생성
-AppBar placeAppbar(context) {
+AppBar placeAppbar(context, double di) {
   return AppBar(
     //뒤로가기 버튼 없애기
     automaticallyImplyLeading: false,
@@ -13,8 +13,8 @@ AppBar placeAppbar(context) {
       children: [
         // 로고 설정
         SizedBox(
-          height: 50,
-          width: 120,
+          height: 0.05 * di,
+          width: 0.12 * di,
           child: InkWell(
             onTap: () => Get.offAllNamed("/"),
             child: Image.asset("assets/images/dingga_logo2.png"),
@@ -26,27 +26,27 @@ AppBar placeAppbar(context) {
 }
 
 Widget selectBtns(
-  String place,
-  BtnController btncontroller,
-  PlaceDataController placeController,
-  int limitNum,
-  bool trueBack,
-) {
+    String place,
+    BtnController btncontroller,
+    PlaceDataController placeController,
+    int limitNum,
+    bool trueBack,
+    double di) {
   return SingleChildScrollView(
     child: Padding(
-      padding: const EdgeInsets.all(15),
+      padding: EdgeInsets.all(0.01 * di),
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // 표만들기 버튼
           SizedBox(
-            height: 50,
+            height: 0.06 * di,
             width: double.infinity,
             child: OutlinedButton(
-              child: const Center(
+              child: Center(
                 child: Text(
                   "표만들기",
-                  style: TextStyle(fontSize: 23),
+                  style: TextStyle(fontSize: 0.03 * di),
                 ),
               ),
               onPressed: () async {
@@ -74,7 +74,7 @@ Widget selectBtns(
               },
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 0.02 * di),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -94,14 +94,14 @@ Widget selectBtns(
                         bool isSelected =
                             btncontroller.selectedPlaceCode.contains(placeCode);
                         return Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0.02 * di),
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
                                 // 색 변경
                                 backgroundColor:
                                     isSelected ? Colors.lime : Colors.lime[100],
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                    EdgeInsets.symmetric(horizontal: 0.01 * di),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
                                 )),
@@ -112,7 +112,10 @@ Widget selectBtns(
                             child: Text(
                               place,
                               maxLines: 1,
-                              style: const TextStyle(color: Colors.black87),
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 0.015 * di,
+                              ),
                             ),
                           ),
                         );
@@ -120,7 +123,7 @@ Widget selectBtns(
                   ],
                 ),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: 0.01 * di),
               // 정보 선택 버튼
               Flexible(
                 flex: 1,
@@ -138,14 +141,14 @@ Widget selectBtns(
                         bool isSelected = btncontroller.selectedKategorieCode
                             .contains(kategorieCode);
                         return Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0.02 * di),
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
                               // 누르면 색 변경
                               backgroundColor:
                                   isSelected ? Colors.amber : Colors.amber[100],
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                                  EdgeInsets.symmetric(horizontal: 0.01 * di),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -156,7 +159,10 @@ Widget selectBtns(
                             },
                             child: Text(
                               kategorie,
-                              style: const TextStyle(color: Colors.black87),
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 0.015 * di,
+                              ),
                             ),
                           ),
                         );
@@ -172,11 +178,8 @@ Widget selectBtns(
   );
 }
 
-Obx getTable(
-  PlaceDataController placeController,
-  CustomDrawerController drawerController,
-  double tableWidth,
-) {
+Obx getTable(PlaceDataController placeController,
+    CustomDrawerController drawerController, double tableWidth, double di) {
   return Obx(
     () {
       // 데이터 로딩중
@@ -192,7 +195,15 @@ Obx getTable(
               // 호버 색상, 클릭시 색상 제거
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
-              child: const Center(child: Text("장소와 정보를 선택해 주세요.")),
+              child: Center(
+                child: Text(
+                  "장소와 정보를 선택해 주세요.",
+                  style: TextStyle(
+                    fontSize: 0.025 * di,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
             )
           // 테이블 그리기
           : InkWell(
@@ -203,8 +214,16 @@ Obx getTable(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const Text("※ 해당 정보는 다를 수 있습니다."),
-                    const SizedBox(height: 15),
+                    Text(
+                      "※ 해당 정보는 다를 수 있습니다.",
+                      style: TextStyle(
+                        fontSize: 0.02 * di,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 0.015 * di,
+                    ),
                     // Table 생성
                     Table(
                       // 선택한 정보칸 크기 설정
@@ -219,13 +238,13 @@ Obx getTable(
                           children: [
                             for (var place in placeController.placeList)
                               Container(
-                                height: 50,
+                                height: 0.06 * di,
                                 color: Colors.amber[200],
                                 alignment: Alignment.centerLeft,
-                                padding: const EdgeInsets.all(10),
+                                padding: EdgeInsets.all(0.015 * di),
                                 child: Text(
                                   place,
-                                  style: const TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 0.021 * di),
                                 ),
                               ),
                           ],
@@ -239,10 +258,10 @@ Obx getTable(
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                padding: const EdgeInsets.all(10),
+                                padding: EdgeInsets.all(0.015 * di),
                                 child: Text(
                                   placeController.kategorieList[i],
-                                  style: const TextStyle(fontSize: 18),
+                                  style: TextStyle(fontSize: 0.02 * di),
                                 ),
                               ),
                               for (int j = 0;
@@ -250,17 +269,17 @@ Obx getTable(
                                   j++)
                                 Container(
                                   alignment: Alignment.centerLeft,
-                                  padding: const EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(0.015 * di),
                                   child: Text(
                                     tableData[j].values.toList()[i],
-                                    style: const TextStyle(fontSize: 15),
+                                    style: TextStyle(fontSize: 0.02 * di),
                                   ),
                                 ),
                             ],
                           )
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 0.015 * di),
                   ],
                 ),
               ),

@@ -2,6 +2,7 @@ import 'package:dingga/widget/place_controller.dart';
 import 'package:dingga/widget/place_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:math';
 
 class MobileScreen extends StatelessWidget {
   final Map<String, String> placeMap;
@@ -29,9 +30,15 @@ class MobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // MediaQuery를 사용하여 화면 너비와 높이를 가져옵니다.
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    // 대각선 크기 계산
+    double diagonal =
+        sqrt(screenWidth * screenWidth + screenHeight * screenHeight);
     return Scaffold(
       key: drawerController.scaffoldKey,
-      appBar: placeAppbar(context),
+      appBar: placeAppbar(context, diagonal),
       endDrawer: Drawer(
         width: drawerWidth,
         child: selectBtns(
@@ -40,9 +47,15 @@ class MobileScreen extends StatelessWidget {
           placeController,
           limitNum,
           true,
+          diagonal,
         ),
       ),
-      body: getTable(placeController, drawerController, 0.3),
+      body: getTable(
+        placeController,
+        drawerController,
+        0.0003 * diagonal,
+        diagonal,
+      ),
     );
   }
 }
@@ -71,8 +84,14 @@ class DesktopScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // MediaQuery를 사용하여 화면 너비와 높이를 가져옵니다.
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    // 대각선 크기 계산
+    double diagonal =
+        sqrt(screenWidth * screenWidth + screenHeight * screenHeight);
     return Scaffold(
-      appBar: placeAppbar(context),
+      appBar: placeAppbar(context, 0.75 * diagonal),
       body: Row(
         children: [
           Flexible(
@@ -80,7 +99,12 @@ class DesktopScreen extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.all(15),
               alignment: Alignment.topCenter,
-              child: getTable(placeController, drawerController, 0.15),
+              child: getTable(
+                placeController,
+                drawerController,
+                0.0001 * diagonal,
+                0.7 * diagonal,
+              ),
             ),
           ),
           const VerticalDivider(color: Colors.black26),
@@ -93,6 +117,7 @@ class DesktopScreen extends StatelessWidget {
               placeController,
               7,
               false,
+              0.75 * diagonal,
             ),
           )
         ],
